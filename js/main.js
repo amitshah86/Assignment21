@@ -1,6 +1,4 @@
 import $ from 'jquery';
-import _ from 'underscore';
-import moment from 'moment';
 import Router from './router';
 
 import './ajax_setup';

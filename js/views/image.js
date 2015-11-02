@@ -1,9 +1,3 @@
-// this.props = {
-//   src: 'the url: https...',
-//   id: 'the objectId: UHDWKSU'
-//   onSelect: is the function we are given
-// }
-
 import React from 'react';
 
 export default React.createClass({
@@ -15,7 +9,7 @@ export default React.createClass({
 
   render() {
     return (
-      <div className="thumbnail" onClick={this.clickHandler}>
+      <div className="image" onClick={this.clickHandler}>
         <img src={this.props.src}/>
       </div>
     );

@@ -3,13 +3,13 @@ import $ from 'jquery';
 import ReactDom from 'react-dom';
 import React from 'react';
 
-import TodosCollection from './todos_collection';
+import ImagesCollection from './images_collection';
 
-import ThumbnailList from './views/thumbnail_list';
-import PreviewImage from './views/thumbnail';
+import ImageList from './views/image_list';
+import PreviewImage from './views/image';
 
 
-const DUMMY_DATA = [
+const PARSE_DATA = [
   {
     objectId: '1',
     title: 'Black Cat',
@@ -25,8 +25,12 @@ const DUMMY_DATA = [
     title: 'Jack',
     url: 'http://parkslopefifthavenuebid.com/sites/parkslopefifthavenuebid.com/files/node_image/pumpkin.png',
     about: 'Something I stuck a knife into.'
-  }
-];
+  },{
+    objectId: '4',
+    title: 'Matt Ryan',
+    image: 'http://www.profootballfocus.com/wp-content/uploads/2014/06/MattRyan.jpg',
+    about: 'NFL.'
+  ];
 
 
 let Router = Backbone.Router.extend({
@@ -39,46 +43,25 @@ let Router = Backbone.Router.extend({
   initialize: function(appElement) {
     this.el = appElement;
 
-    this.todos = new TodosCollection();
+    this.images = new ImagesCollection();
 
 
   },
 
   home() {
-    
-    let peanutButter = ['one', 'two', 'buckle', 'show'];
-
-    // ReactDom.render(
-
-    //   <Example peanutButter={['one', 'two', 'buckle', 'show']}>
-
-    //   </Example>, 
-
-    //   this.el);
-
-    // $(this.el).html(NonReactView(peanutButter));
-
-
-
-
+  
     ReactDom.render(
-      <ThumbnailList onThumbnailSelect={this.selectImage.bind(this)} data={DUMMY_DATA}/>,
+      <ImageList onImageSelect={this.selectImage.bind(this)} data={PARSE_DATA}/>,
       this.el
     );
   },
 
   selectImage(id) {
-    // alert('got the id but from the router: ' + id);
     this.navigate('images/' + id, {trigger: true});
   },
 
   showImage(id) {
-    let image = DUMMY_DATA.find(item => item.objectId === id);
-    // short hand for the below:
-    // let filterImages = DUMMY_DATA.filter(function(item) {
-    //   return item.objectId === id;
-    // });
-    // let image = filterImages[0];
+    let image = PARSE_DATA.find(item => item.objectId === id);
 
     ReactDom.render(<PreviewImage src={image.url}/>, this.el);
   },
